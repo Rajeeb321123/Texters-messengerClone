@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+:root {
+  height: 100%;
+  overflow: overlay;
+  background-image: url("/images/background.gif");
+  background-size: cover;
+  color: white;
+
+  cursor: url("/images/cursor/cursor/1.gif"), auto;
+  -webkit-animation: cursor 400ms infinite;
+  animation: cursor 400ms infinite;
+  
+}
+
+@-webkit-keyframes cursor {
+  0% {cursor: url("/images/cursor/cursor/1.gif"), auto;}
+  10% {cursor: url("/images/cursor/cursor/2.gif"), auto;}
+  20% {cursor: url("/images/cursor/cursor/3.gif"), auto;}
+  30% {cursor: url("/images/cursor/cursor/4.gif"), auto;}
+  40% {cursor: url("/images/cursor/cursor/5.gif"), auto;}
+  50% {cursor: url("/images/cursor/cursor/6.gif"), auto;}
+  60% {cursor: url("/images/cursor/cursor/7.gif"), auto;}
+  70% {cursor: url("/images/cursor/cursor/8.gif"), auto;}
+  80% {cursor: url("/images/cursor/cursor/9.gif"), auto;}
+  90% {cursor: url("/images/cursor/cursor/10.gif"), auto;}
+  100% {cursor: url("/images/cursor/cursor/11.gif"), auto;}
+} 
+@keyframes cursor {
+  0% {cursor: url("/images/cursor/cursor/1.gif"), auto;}
+  10% {cursor: url("/images/cursor/cursor/2.gif"), auto;}
+  20% {cursor: url("/images/cursor/cursor/3.gif"), auto;}
+  30% {cursor: url("/images/cursor/cursor/4.gif"), auto;}
+  40% {cursor: url("/images/cursor/cursor/5.gif"), auto;}
+  50% {cursor: url("/images/cursor/cursor/6.gif"), auto;}
+  60% {cursor: url("/images/cursor/cursor/7.gif"), auto;}
+  70% {cursor: url("/images/cursor/cursor/8.gif"), auto;}
+  80% {cursor: url("/images/cursor/cursor/9.gif"), auto;}
+  90% {cursor: url("/images/cursor/cursor/10.gif"), auto;}
+  100% {cursor: url("/images/cursor/cursor/11.gif"), auto;}
+} 
+
+
+
+::-webkit-scrollbar {
+  width: 30px;
+  overflow: auto;
+  
+  background-color: transparent;
+  z-index: -10px
+
+  
+  
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+
+
+}
+
+::-webkit-scrollbar-thumb {
+  background-image: url("https://i.ibb.co/q95CBdZ/train.png");
+    background-position:center center;
+    background-repeat: no-repeat;
+    background-size: 35px;
+    
+}
