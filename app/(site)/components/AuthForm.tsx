@@ -39,7 +39,7 @@ const AuthForm = () => {
             console.log('Authenticated');
             router.push('/users');
         }
-    }, [session, session?.status]);
+    }, [session, session?.status, router]);
 
     // toggle betwen login and register form
     const toggleVairant = useCallback(() => {
