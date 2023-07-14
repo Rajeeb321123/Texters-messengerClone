@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { MdOutlineGroupAdd } from 'react-icons/md';
 import { PiLightbulbThin } from 'react-icons/pi'
 import Image from "next/image";
+import { find } from "lodash";
 
 import { User } from "@prisma/client";
 import { FullConversationType } from "@/app/types";
@@ -15,7 +16,6 @@ import BlurGlow from "@/app/components/BlurGlow";
 import GroupChatModal from "./GroupChatModal";
 import { useSession } from "next-auth/react";
 import { pusherClient } from "@/app/libs/pusher";
-import { find } from "lodash";
 
 interface ConversationsListProps {
     // name is initialItem because it is just going to be the initial load 

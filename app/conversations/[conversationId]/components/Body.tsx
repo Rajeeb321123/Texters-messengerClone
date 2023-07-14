@@ -6,13 +6,13 @@
 //main body of conversation page
 import { useState,useRef, useEffect } from 'react';
 import axios from 'axios';
+import { find } from 'lodash';
 
 
 import { FullMessageType } from "@/app/types";
 import useConversation from '@/app/hooks/useConversation';
 import MessageBox from './MessageBox';
 import { pusherClient } from '@/app/libs/pusher';
-import { find } from 'lodash';
 
 interface BodyProps {
   initialMessages:  FullMessageType[];
