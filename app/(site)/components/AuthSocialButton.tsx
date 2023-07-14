@@ -8,7 +8,7 @@ interface AuthSocialButtonProps {
     disabled?: boolean;
 };
 import { BsGithub, BsGoogle } from 'react-icons/bs';
-import { FaFacebookSquare } from 'react-icons/fa'
+// import { FaFacebookSquare } from 'react-icons/fa'
 
 
 
@@ -102,7 +102,7 @@ const AuthSocialButton: React.FC<AuthSocialButtonProps> = ({
                 </div>
             )}
 
-            {Icon === FaFacebookSquare && !disabled && (
+            {/* {Icon === FaFacebookSquare && !disabled && (
                 <div className="
                     absolute 
                     top-0  
@@ -126,7 +126,7 @@ const AuthSocialButton: React.FC<AuthSocialButtonProps> = ({
                         &nbsp;
                     </div>
                 </div>
-            )}
+            )} */}
         </button>
     )
 }

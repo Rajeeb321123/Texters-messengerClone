@@ -8,7 +8,7 @@ import {
     SubmitHandler
 } from "react-hook-form";
 import { BsGithub, BsGoogle } from 'react-icons/bs';
-import { FaFacebookSquare } from 'react-icons/fa'
+// import { FaFacebookSquare } from 'react-icons/fa'
 import axios from "axios";
 import { toast } from 'react-hot-toast';
 import { signIn, useSession } from 'next-auth/react';
@@ -17,7 +17,7 @@ import { useRouter } from 'next/navigation';
 import Input from "@/app/components/inputs/Input";
 import Button from "@/app/components/Button";
 import AuthSocialButton from "./AuthSocialButton";
-import Image from "next/image";
+
 import Logo from "./Logo";
 import Loader from "@/app/components/Loader";
 
@@ -283,11 +283,11 @@ const AuthForm = () => {
                                             icon={BsGithub}
                                             onClick={() => socialAction('github')}
                                         />
-                                        <AuthSocialButton
+                                        {/* <AuthSocialButton
                                             disabled={isLoading}
                                             icon={FaFacebookSquare}
                                             onClick={() => socialAction('facebook')}
-                                        />
+                                        /> */}
                                         <AuthSocialButton
                                             disabled={isLoading}
                                             icon={BsGoogle}
