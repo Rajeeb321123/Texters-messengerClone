@@ -88,7 +88,7 @@ const Logo: React.FC<LogoProps> = ({
                 alt="Logo"
                 height={size}
                 width={size}
-                className={`ml-auto mr-auto rounded-2xl `}
+                className={`ml-auto mr-auto rounded-2xl animate-[bounce_1s_ease-in-out_8]`}
                 src={isGigLogo ? `/images/logo-nobg.gif` : `/images/logo-nobg.png`}
             />
         </button>
