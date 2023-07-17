@@ -3,6 +3,8 @@
 import React, { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { IoIosCloseCircleOutline, IoIosTrash } from 'react-icons/io';
+import clsx from 'clsx';
+
 import BlurGlow from './BlurGlow';
 
 interface ModalProps {
@@ -10,9 +12,15 @@ interface ModalProps {
     onClose: () => void;
     children: React.ReactNode;
     closeButton?: boolean;
+    videoCall?: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, closeButton=true, children }) => {
+const Modal: React.FC<ModalProps> = ({ 
+    isOpen, 
+    onClose, 
+    videoCall=false,
+    closeButton=true, children },
+    ) => {
     return (
         <Transition.Root show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-50" onClose={onClose}>
@@ -58,24 +66,25 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, closeButton=true, childr
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
                             <Dialog.Panel
-                                className="
-                                        relative 
-                                        transform 
-                                        overflow-hidden 
-                                        rounded-lg 
-                                        bg-black
-                                        px-4 
-                                        pb-4
-                                        pt-5 
-                                        text-left 
-                                        shadow-xl 
-                                        transition-all
-                                        w-full
-                                        sm:my-8 
-                                        sm:w-full 
-                                        sm:max-w-lg 
-                                        sm:p-6
-                                    "
+                                className = {clsx(`
+                                relative 
+                                transform 
+                                overflow-hidden 
+                                rounded-lg 
+                                bg-black
+                                px-4 
+                                pb-4
+                                pt-5 
+                                text-left 
+                                shadow-xl 
+                                transition-all
+                                w-full
+                                sm:my-8 
+                                sm:w-full 
+                                sm:p-6
+                                `,
+                                videoCall ? 'sm:mx-10': 'sm:max-w-lg'
+                                )}
                             >
                                 {closeButton && (
 

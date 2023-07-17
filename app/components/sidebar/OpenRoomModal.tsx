@@ -1,5 +1,7 @@
 'use client';
 
+// MOdal for opening the VideoCall.tsx
+
 
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -77,10 +79,10 @@ const SettingModal: React.FC<SettingModalProps> = ({
                             text-white
                         "
                     >
-                        Profile
+                        VideoCall Room
                     </h2>
                     <p className="mt-1 text-sm leading-6 text-white/70 ">
-                        Edit your public Information.
+                        Room you want to join or create. No spaces please
                     </p>
                     <div className="
                             mt-10
@@ -121,7 +123,7 @@ const SettingModal: React.FC<SettingModalProps> = ({
                         
                         type="submit"
                     >
-                        Create or Join the Room
+                        Create or Join the room
                     </Button>
                     <div>
 
