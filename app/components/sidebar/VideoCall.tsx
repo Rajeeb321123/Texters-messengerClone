@@ -98,7 +98,9 @@ const VideoCallModal: React.FC<VideocallProps> = ({
     channelRef.current.bind("pusher:member_removed", handlePeerLeaving);
 
     channelRef.current.bind('client-ready', () => {
-      initiateCall()
+      setUserConnected(true);
+      initiateCall();
+      
     });
 
     channelRef.current.bind(
@@ -126,9 +128,11 @@ const VideoCallModal: React.FC<VideocallProps> = ({
       (iceCandidate: RTCIceCandidate) => {
         // answer is sent by non-host, so only host should handle it
         handlerNewIceCandidateMsg(iceCandidate)
-        setUserConnected(true);
+        
       }
     )
+
+
 
     
 
@@ -241,6 +245,8 @@ const VideoCallModal: React.FC<VideocallProps> = ({
 
   const handleTrackEvent = (event: RTCTrackEvent) => {
     partnerVideo.current!.srcObject = event.streams[0]
+    
+
   };
 
   const handlePeerLeaving = () => {
