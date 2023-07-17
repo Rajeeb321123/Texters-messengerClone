@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FcSettings } from 'react-icons/fc';
+import { MdOutlineVideoCall } from 'react-icons/md';
 
 import { User } from "@prisma/client";
 
@@ -9,6 +10,8 @@ import useRoutes from "@/app/hooks/useRoutes";
 import DesktopItem from "./DesktopItem";
 import Avatar from "../Avatar";
 import SettingModal from "./SettingModal";
+import OpenRoomModal from "./OpenRoomModal";
+import VideoCallModal from "./VideoCall";
 
 
 interface DesktopSidebarProps {
@@ -22,12 +25,35 @@ const DesktopSidebar:React.FC<DesktopSidebarProps> = ({
   //for opening the setting module 
   const [isOpen, setIsOpen] = useState(false);
 
+  const[isRoomModalOpen, setIsRoomModalOpen] = useState(false);
+  const [roomName, setRoomName] = useState<string>();
+  const [isVideoCallOpen, setIsVideoCallOpen] = useState(false);
+
+  console.log(roomName)
+
  
 
 
   return (
     <>
       <SettingModal currentUser={currentUser} isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <OpenRoomModal  
+        isOpen={isRoomModalOpen} 
+        setRoomName={(value) => setRoomName(value)} 
+        onClose={() => setIsRoomModalOpen(false)} 
+        setIsVideoCallOpen={() => setIsVideoCallOpen(true)}
+      />
+      {roomName && (
+
+        
+        <VideoCallModal  
+        isOpen={isVideoCallOpen} 
+        roomName={roomName}
+        
+        
+        />
+        )
+      }
 
       <div
         className="
@@ -93,6 +119,28 @@ const DesktopSidebar:React.FC<DesktopSidebarProps> = ({
           "
           >
             <div
+              onClick={() => setIsRoomModalOpen(true)}
+              className="
+              relative 
+              flex
+              items-center
+              justify-center
+              overflow-hidden
+              h-9 
+              w-9 
+              md:h-11 
+              md:w-11
+              group
+              cursor-pointer
+              animate-[pointer_400ms_infinite]
+              text-gray-400
+              
+              "
+            >
+                <MdOutlineVideoCall  className='group-hover:scale-110' size={40}/>
+            </div>
+
+            <div
               onClick={() => setIsOpen(true)}
               className="
               relative 
@@ -112,6 +160,7 @@ const DesktopSidebar:React.FC<DesktopSidebarProps> = ({
             >
                 <FcSettings  className='group-hover:animate-spin' size={40}/>
             </div>
+            
           <div
             onClick={() => setIsOpen(true)}
             className="

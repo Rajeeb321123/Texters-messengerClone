@@ -1,12 +1,16 @@
 'use client';
 
+import { useState } from "react";
+import { FcSettings } from "react-icons/fc";
+import { MdOutlineVideoCall } from 'react-icons/md';
+
+import { User } from "@prisma/client";
 import useConversation from "@/app/hooks/useConversation";
 import useRoutes from "@/app/hooks/useRoutes";
 import MobileItem from "./MobileItem";
-import { FcSettings } from "react-icons/fc";
 import SettingModal from "./SettingModal";
-import { useState } from "react";
-import { User } from "@prisma/client";
+import OpenRoomModal from "./OpenRoomModal";
+import VideoCallModal from "./VideoCall";
 
 interface MobileFooterProps {
     currentUser?: User | null
@@ -18,6 +22,9 @@ const MobileFooter:React.FC<MobileFooterProps> = ({
     const routes = useRoutes();
     const { isOpen } = useConversation();
     const [isSettingOpen, setIsSettingOpen] = useState(false);
+    const[isRoomModalOpen, setIsRoomModalOpen] = useState(false);
+  const [roomName, setRoomName] = useState<string>();
+  const [isVideoCallOpen, setIsVideoCallOpen] = useState(false);
 
     // if active coversation then we dont want to show mobile footer
     if (isOpen) {
@@ -25,7 +32,25 @@ const MobileFooter:React.FC<MobileFooterProps> = ({
     };
     return (
         <>
-        <SettingModal currentUser={currentUser} isOpen={isSettingOpen} onClose={() => setIsSettingOpen(false)} />
+            <SettingModal currentUser={currentUser} isOpen={isSettingOpen} onClose={() => setIsSettingOpen(false)} />
+            
+            <OpenRoomModal  
+                isOpen={isRoomModalOpen} 
+                setRoomName={(value) => setRoomName(value)} 
+                onClose={() => setIsRoomModalOpen(false)} 
+                setIsVideoCallOpen={() => setIsVideoCallOpen(true)}
+            />
+            {roomName && (
+
+                
+                <VideoCallModal  
+                isOpen={isVideoCallOpen} 
+                roomName={roomName}
+                
+                
+                />
+                )
+            }
 
             <div
                 className="
@@ -62,6 +87,7 @@ const MobileFooter:React.FC<MobileFooterProps> = ({
                 items-center
                 justify-center
                 overflow-hidden
+                gap-2
                 h-9 
                 w-40 
                 md:h-11 
@@ -72,6 +98,29 @@ const MobileFooter:React.FC<MobileFooterProps> = ({
                 >
                     <FcSettings  className='group-hover:animate-spin' size={40}/>
                 </div>   
+                <div
+                onClick={() => setIsRoomModalOpen(true)}
+                className="
+                absolute
+                top-[-50px]
+                left-[-20px]
+                flex
+                items-center
+                justify-center
+                overflow-hidden
+                gap-2
+                h-9 
+                w-40 
+                md:h-11 
+                md:w-11
+                group
+                text-gray-400
+                
+                "
+                >
+                    <MdOutlineVideoCall  className='group-hover:scale-110' size={60}/>
+                </div>   
+                    
             
                 </div >
             </>

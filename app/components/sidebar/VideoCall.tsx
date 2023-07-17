@@ -2,9 +2,14 @@
 
 import Pusher, { Members, PresenceChannel, Channel } from "pusher-js";
 import { pusherClient } from "@/app/libs/pusher";
+import { BsFillMicFill, BsFillMicMuteFill } from 'react-icons/bs';
+import { MdCallEnd } from 'react-icons/md';
+import { BiCamera, BiCameraOff } from 'react-icons/bi'
+
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import Modal from "../Modal";
 
 
 const ICE_SERVERS = {
@@ -25,11 +30,17 @@ const ICE_SERVERS = {
 
 interface VideocallProps {
     roomName: string;
+    isOpen: boolean;
+    
 };
 
-const Videocall:React.FC<VideocallProps> = ({
-    roomName
+const VideoCallModal:React.FC<VideocallProps> = ({
+    roomName,
+    isOpen,
+    
 }) => {
+
+
     const [micActive, setMicActive] = useState(true);
     const [cameraActive, setCameraActive] = useState(true);
 
@@ -267,8 +278,9 @@ const Videocall:React.FC<VideocallProps> = ({
           rtcConnection.current.close()
           rtcConnection.current = null
         }
-    
-        router.push('/')
+
+
+        router.push("/");
       }
     
       const toggleMic = () => {
@@ -289,33 +301,61 @@ const Videocall:React.FC<VideocallProps> = ({
         })
       }
 
-
+      
 
 
     return (
-        <div>
-      <div className="w-full">
-        <div className="">
-          <video autoPlay ref={userVideo} muted />
-          <div>
-            <button onClick={toggleMic} type="button">
-              {micActive ? 'Mute Mic' : 'UnMute Mic'}
-            </button>
-            <button onClick={leaveRoom} type="button">
-              Leave
-            </button>
-            <button onClick={toggleCamera} type="button">
-              {cameraActive ? 'Stop Camera' : 'Start Camera'}
-            </button>
-          </div>
+
+      <Modal
+        isOpen={isOpen} 
+        onClose={leaveRoom}
+        closeButton={false}
+      >
+
+          <div >
+            <div className="w-full ">
+              <div className="flex flex-col ">
+                <div className="w-full  rounded-md flex max-h-[600px]  overflow-hidden">
+                <video className="" autoPlay ref={userVideo} muted />
+                <video autoPlay ref={partnerVideo} />
+                </div>
+                
+                <div className=" absolute inset-x-0 bottom-3  mx-auto ">
+                  <div 
+                    className="
+                      flex 
+                      gap-10
+                      justify-center
+                      
+                      px-2
+                      py-2
+                    "
+                  >
+                  
+                  {
+
+                  }
+                  
+
+                  <button onClick={toggleMic} type="button" className="bg-gray-700/50 rounded-full">
+                    {micActive ? <BsFillMicFill className="p-1" size={30} /> : <BsFillMicMuteFill className="p-1" size={30}/>}
+                  </button>
+                  <button onClick={leaveRoom} type="button" className="bg-gray-700/50 text-red-500 rounded-full">
+                  <MdCallEnd className="p-1" size={30}/>
+                  </button>
+                  <button onClick={toggleCamera} type="button">
+                    {cameraActive ? <BiCamera className="p-1" size={30}/> : <BiCameraOff className="p-1" size={30}/>}
+                  </button>
+                  </div>
+                  </div>
+                
+              </div>
+            
+            </div>
         </div>
-        <div className="">
-          <video autoPlay ref={partnerVideo} />
-        </div>
-      </div>
-    </div>
+      </Modal>
     );
 
 }
 
-export default Videocall
+export default VideoCallModal;

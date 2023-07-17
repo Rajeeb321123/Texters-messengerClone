@@ -9,9 +9,10 @@ interface ModalProps {
     isOpen?: boolean;
     onClose: () => void;
     children: React.ReactNode;
+    closeButton?: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, closeButton=true, children }) => {
     return (
         <Transition.Root show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-50" onClose={onClose}>
@@ -76,42 +77,48 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                                         sm:p-6
                                     "
                             >
-                                <div
-                                    className="
-                                        absolute 
-                                        right-0 
-                                        top-0 
-                                        hidden 
-                                        pr-4 
-                                        pt-4 
-                                        sm:block
-                                        z-10
-                                        bg-black
-                                    "
-                                >
+                                {closeButton && (
+
                                     
-                                    <button
+                                    <div
+                                    className="
+                                    absolute 
+                                    right-0 
+                                    top-0 
+                                    hidden 
+                                    pr-4 
+                                    pt-4 
+                                    sm:block
+                                    z-10
+                                    bg-black
+                                    "
+                                    >
+                                     
+                                        <button
                                         onClick={onClose}
                                         type='button'
                                         className='
-                                                text-[#a28c70]
-                                                hover:text-[#e8c179]
-                                                transition
-                                                cursor-pointer
-                                                animate-[pointer_400ms_infinite]
-                                                relative
-                                                group
-                                            '
-                                    >
+                                        text-[#a28c70]
+                                        hover:text-[#e8c179]
+                                        transition
+                                        cursor-pointer
+                                        animate-[pointer_400ms_infinite]
+                                        relative
+                                        group
+                                        '
+                                        >
                                         <span className='sr-only'>Close panel</span>
                                         <BlurGlow
                                             outlineColor="#3e204a"
                                             bgColor="#d0a24e"
-                                        />
+                                            />
                                         <IoIosCloseCircleOutline  aria-hidden="true" size={25} />
 
-                                    </button>
-                                </div>
+                                        </button>
+                                    
+                                    </div>
+                                    )
+                                }
                                 {children}
                             </Dialog.Panel>
                         </Transition.Child>
