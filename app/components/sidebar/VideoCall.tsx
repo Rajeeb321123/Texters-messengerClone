@@ -126,10 +126,11 @@ const VideoCallModal: React.FC<VideocallProps> = ({
       (iceCandidate: RTCIceCandidate) => {
         // answer is sent by non-host, so only host should handle it
         handlerNewIceCandidateMsg(iceCandidate)
+        setUserConnected(true);
       }
     )
 
-
+    
 
   }, [roomName]);
 
@@ -220,7 +221,6 @@ const VideoCallModal: React.FC<VideocallProps> = ({
   const handleAnswerReceived = (answer: RTCSessionDescriptionInit) => {
     rtcConnection
       .current!.setRemoteDescription(answer)
-      .then(() => setUserConnected(true))
       .catch((error) => console.log(error))
   };
 
