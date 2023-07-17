@@ -17,6 +17,8 @@ const useRoutes = () => {
     const pathname = usePathname();
     const { conversationId } = useConversation();
 
+    const randomString = Math.random().toString(36).slice(2);
+
     const routes = useMemo(() => [
         {
             label:'Chat',
@@ -31,11 +33,17 @@ const useRoutes = () => {
             active: pathname === '/users'
         },
         {
+            label: 'VideoCall',
+            href: `/room/${randomString}`,
+            icon: HiUsers,
+            active: pathname === '/room'
+        },
+        {
             label: 'logout',
             href: '#',
             onClick: () => signOut(),
             icon: HiArrowLeftOnRectangle
-        }
+        },
     ],[pathname,conversationId]);
 
     return routes;
