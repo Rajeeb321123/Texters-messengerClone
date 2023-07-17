@@ -318,7 +318,7 @@ const VideoCallModal: React.FC<VideocallProps> = ({
       <div >
         <div 
           className="
-            min-h-[750vh] 
+            min-h-[75vh] 
             md:min-h-[80vh] 
             min-w-[100vh]
           "
