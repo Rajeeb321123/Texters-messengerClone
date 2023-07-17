@@ -10,7 +10,6 @@ import { BiCamera, BiCameraOff } from 'react-icons/bi'
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Modal from "../Modal";
-import clsx from "clsx";
 
 
 const ICE_SERVERS = {
@@ -99,11 +98,7 @@ const VideoCallModal: React.FC<VideocallProps> = ({
     channelRef.current.bind("pusher:member_removed", handlePeerLeaving);
 
     channelRef.current.bind('client-ready', () => {
-      if(userConnected === false){
-        setUserConnected(true);
-      };
-      initiateCall();
-      
+      initiateCall()
     });
 
     channelRef.current.bind(
@@ -111,9 +106,6 @@ const VideoCallModal: React.FC<VideocallProps> = ({
       (offer: RTCSessionDescriptionInit) => {
         // offer is sent by the host, so only non-host should handle it
         if (!host.current) {
-          if(userConnected === false){
-            setUserConnected(true);
-          };
           handleReceivedOffer(offer)
         }
       }
@@ -134,13 +126,10 @@ const VideoCallModal: React.FC<VideocallProps> = ({
       (iceCandidate: RTCIceCandidate) => {
         // answer is sent by non-host, so only host should handle it
         handlerNewIceCandidateMsg(iceCandidate)
-        
       }
     )
 
-
-
-    
+      
 
   }, [roomName]);
 
@@ -251,8 +240,6 @@ const VideoCallModal: React.FC<VideocallProps> = ({
 
   const handleTrackEvent = (event: RTCTrackEvent) => {
     partnerVideo.current!.srcObject = event.streams[0]
-    
-
   };
 
   const handlePeerLeaving = () => {
@@ -316,6 +303,9 @@ const VideoCallModal: React.FC<VideocallProps> = ({
     })
   }
 
+
+
+
   return (
 
     <Modal
@@ -328,41 +318,50 @@ const VideoCallModal: React.FC<VideocallProps> = ({
       <div >
         <div 
           className="
-            min-h-[80vh]
-            max-h-[80vh] 
-             
+            min-h-[750vh] 
+            md:min-h-[80vh] 
             min-w-[100vh]
           "
           >
             <video 
-              className = {clsx(`
+              className="
                 absolute
-                overflow-hidden
-                object-contain
+                right-0
+                bottom-0
+                min-w-[100%]
+                min-h-[100%]
                 w-auto
                 h-auto
-                
-                `,
-                userConnected === false ? 'right-0 bottom-0 min-w-[100%] min-h-[100%]' : 'left-0 top-0 min-w-[20%]  min-h-[20%] max-w-[20%] max-h-[20%] lg:max-h-[40%] lg:min-h-[40%] shadow-md shadow-black/50 border-gray-700/50 hover:scale-110'
-              )}
+                overflow-hidden
+                object-fill
+              "
               autoPlay 
-              ref={userVideo} 
+              ref={partnerVideo} 
               muted 
             />
           
 
             <video 
-              className = {clsx(`
-              absolute
-              overflow-hidden
-              object-contain
-              w-auto
-              h-auto
-              `,
-              userConnected === false ? 'left-0 top-0 min-w-[20%]  min-h-[20%] max-w-[20%] max-h-[20%] lg:max-h-[40%] lg:min-h-[40%] shadow-md shadow-black/50 border-gray-700/50 hover:scale-110' : ' right-0 bottom-0 min-w-[100%] min-h-[100%] '
-            )}
+              className="
+                absolute
+                right-0
+                top-0
+                min-w-[20%]
+                min-h-[20%]
+                max-w-[20%]
+                max-h-[20%]
+                lg:max-h-[30%]
+                lg:min-h-[30%]
+                object-fill
+                h-auto
+                w-auto
+                overflow-hidden
+                shadow-md shadow-black/50
+                border-gray-700/50
+                hover:scale-110
+              "
               autoPlay 
-              ref={partnerVideo} 
+              ref={userVideo} 
             />
           
 

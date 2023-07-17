@@ -83,7 +83,7 @@ const Modal: React.FC<ModalProps> = ({
                                 sm:w-full 
                                 sm:p-6
                                 `,
-                                videoCall ? 'sm:mx-10': 'sm:max-w-lg'
+                                videoCall ? 'sm:mx-10 max-w-xl': 'sm:max-w-lg'
                                 )}
                             >
                                 {closeButton && (
