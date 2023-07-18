@@ -337,7 +337,7 @@ const VideoCallModal: React.FC<VideocallProps> = ({
               "
               autoPlay 
               ref={partnerVideo} 
-              muted 
+              
             />
           
 
@@ -361,7 +361,8 @@ const VideoCallModal: React.FC<VideocallProps> = ({
                 hover:scale-110
               "
               autoPlay 
-              ref={userVideo} 
+              ref={userVideo}
+              muted  
             />
           
 
